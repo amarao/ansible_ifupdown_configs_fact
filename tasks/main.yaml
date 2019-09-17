@@ -1,0 +1,13 @@
+---
+- name: network_config_facts | Create directory for cutom facts
+  become: true
+  file:
+    path: /etc/ansible/facts.d/
+    state: directory
+- name: network_config_facts | Install custom fact script
+  become: true
+  copy:
+    src: ifupdown_cfg.py
+    dest: /etc/ansible/facts.d/ifupdown_cfg.fact
+    mode: 0775
+  notify: setup
